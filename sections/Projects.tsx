@@ -70,11 +70,11 @@ const ProjectCard = ({ project, index, scrollYProgress }: any) => {
       style={{ 
         y: index === 0 ? 0 : y,
         scale,
-        opacity: 1, // Fixed opacity as per user request
+        opacity: 1,
         zIndex: index,
-        top: `${10 + index * 2}vh`, 
+        top: `calc(8vh + ${index * 1.5}vh)`, // Slightly more compact stacking on mobile
       }}
-      className="sticky h-[75vh] w-[94%] md:w-full max-w-6xl rounded-[40px] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.5)] border border-white/10 bg-black mb-10 cursor-pointer group/card"
+      className="sticky h-[50vh] sm:h-[70vh] md:h-[75vh] w-[92%] md:w-full max-w-6xl rounded-[30px] md:rounded-[40px] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.5)] border border-white/10 bg-black mb-10 cursor-pointer group/card"
     >
       <a 
         href={project.link} 
@@ -95,7 +95,7 @@ const ProjectCard = ({ project, index, scrollYProgress }: any) => {
             alt={project.title}
             fill
             sizes="100vw"
-            className="object-cover"
+            className="object-cover object-top"
             priority={index === 0}
           />
         </motion.div>
@@ -125,7 +125,7 @@ export const Projects = () => {
             <span className="text-luxury-gold text-[12px] uppercase tracking-[0.6em] font-black mb-6 block">
               Portfolio
             </span>
-            <h2 className="text-6xl md:text-[9rem] font-serif leading-[0.8] tracking-tighter opacity-10">
+            <h2 className="text-4xl sm:text-6xl md:text-[9rem] font-serif leading-[0.8] tracking-tighter opacity-10">
               PROJECTS<span className="text-luxury-gold">.</span>
             </h2>
           </motion.div>
@@ -135,18 +135,15 @@ export const Projects = () => {
       {/* Main Scroll Content with snap points */}
       <div 
         ref={containerRef} 
-        className="relative h-[800vh] flex flex-col items-center -mt-[100vh]"
+        style={{ height: `${(projects.length + 1) * 100}vh` }}
+        className="relative flex flex-col items-center -mt-[100vh]"
       >
         {/* Anchor points for snapping - one for each project + initial title */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="h-[100vh] snap-start" /> {/* Title snap */}
-          <div className="h-[100vh] snap-start" /> {/* Project 1 snap */}
-          <div className="h-[100vh] snap-start" /> {/* Project 2 snap */}
-          <div className="h-[100vh] snap-start" /> {/* Project 3 snap */}
-          <div className="h-[100vh] snap-start" /> {/* Project 4 snap */}
-          <div className="h-[100vh] snap-start" /> {/* Project 5 snap */}
-          <div className="h-[100vh] snap-start" /> {/* Project 6 snap */}
-          <div className="h-[100vh] snap-start" /> {/* Project 7 snap */}
+          {projects.map((_, i) => (
+            <div key={i} className="h-[100vh] snap-start" />
+          ))}
         </div>
 
         {/* Spacer for the title section */}
