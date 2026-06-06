@@ -5,6 +5,7 @@ import { Section } from "@/components/Section";
 import { useState } from "react";
 import { Button } from "@/components/Button";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -243,15 +244,30 @@ export const Contact = () => {
       </Container>
 
       <div className="mt-40 border-t border-luxury-border py-12">
-        <Container className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <span className="font-serif text-xl tracking-tighter">YA<span className="text-luxury-gold">.</span></span>
-          <span className="text-[10px] uppercase tracking-[0.4em] text-luxury-gray">
-            © 2026 Yash. All rights reserved. Built with precision.
-          </span>
-          <div className="flex gap-8">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-luxury-gray hover:text-luxury-gold transition-colors cursor-pointer">Privacy</span>
-            <span className="text-[10px] uppercase tracking-[0.2em] text-luxury-gray hover:text-luxury-gold transition-colors cursor-pointer">Terms</span>
+        <Container className="flex flex-col lg:flex-row justify-between items-center gap-8">
+          <Link href="/" className="font-serif text-xl tracking-tighter">YA<span className="text-luxury-gold">.</span></Link>
+          
+          <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+            {[
+              { name: "Home", href: "/" },
+              { name: "Projects", href: "/#projects" },
+              { name: "Services", href: "/#services" },
+              { name: "AI Solutions", href: "/ai-receptionist" },
+              { name: "Contact", href: "/#contact" }
+            ].map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-[10px] uppercase tracking-[0.2em] text-luxury-gray hover:text-luxury-gold transition-colors duration-500 font-medium"
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
+
+          <span className="text-[10px] uppercase tracking-[0.3em] text-luxury-gray">
+            © 2026 Yash. All rights reserved.
+          </span>
         </Container>
       </div>
     </Section>
